@@ -1,0 +1,19 @@
+{
+    "name": "stajor/proxy-fetcher",
+    "description": "PHP package for dealing with proxy lists from various sources",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "ProxyFetcher\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ProxyFetcher\\Test\\": "tests/"
+        }
+    }
+}
