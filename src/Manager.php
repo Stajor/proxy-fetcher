@@ -1,15 +1,22 @@
 <?php namespace ProxyFetcher;
 
 use ProxyFetcher\Providers\FreeProxyListNet;
+use ProxyFetcher\Providers\SslproxiesOrg;
 
 class Manager {
     protected $providers = [
-        'free-proxy-list.net' => FreeProxyListNet::class
+        'free-proxy-list.net'   => FreeProxyListNet::class,
+        'sslproxies.org'    => SslproxiesOrg::class
     ];
 
     public function fetch() {
-        $provider = new FreeProxyListNet();
+        $proxies = [];
 
-        return $provider->fetch();
+        foreach ($this->providers AS $provider => $class) {
+            $provider = new $class();
+            $proxies = array_merge($proxies, $provider->fetch());
+        }
+
+        return $proxies;
     }
 }
