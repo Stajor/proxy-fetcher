@@ -1,12 +1,14 @@
 <?php namespace ProxyFetcher;
 
 use ProxyFetcher\Providers\FreeProxyListNet;
+use ProxyFetcher\Providers\GatherproxyCom;
 use ProxyFetcher\Providers\SslproxiesOrg;
 
 class Manager {
     protected $providers = [
         'free-proxy-list.net'   => FreeProxyListNet::class,
-        'sslproxies.org'    => SslproxiesOrg::class
+        'sslproxies.org'        => SslproxiesOrg::class,
+        'gatherproxy.com'       => GatherproxyCom::class
     ];
 
     public function fetch() {
