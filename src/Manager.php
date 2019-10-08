@@ -1,5 +1,6 @@
 <?php namespace ProxyFetcher;
 
+use Exception;
 use ProxyFetcher\Providers\FreeProxyListNet;
 use ProxyFetcher\Providers\GatherproxyCom;
 use ProxyFetcher\Providers\MtproXyz;
@@ -13,16 +14,50 @@ class Manager {
         'mtpro.xyz'             => MtproXyz::class
     ];
 
-    public function fetch() {
+    /**
+     * Get proxies list
+     * @param array $filters
+     * @return array
+     */
+    public function fetch(array $filters = []): array {
         $proxies = [];
 
         foreach ($this->providers AS $provider => $class) {
+            $data = [];
+
             try {
-                $provider = new $class();
-                $proxies = array_merge($proxies, $provider->fetch());
-            } catch (\Exception $e) {}
+                $provider   = new $class();
+                $data       = $provider->fetch();
+            } catch (Exception $e) {}
+
+            // Filter rows
+            foreach ($filters AS $filter => $value) {
+                $getter = 'get'.ucfirst($filter);
+
+                if (method_exists(Proxy::class, $getter)) {
+                    $data = array_filter($data, function(Proxy $proxy) use ($getter, $value) {
+                        return $proxy->{$getter}() == $value;
+                    });
+                }
+            }
+
+            $proxies = array_merge($proxies, $data);
+
+            // Limit rows
+            if (isset($filters['limit']) && count($proxies) >= $filters['limit']) {
+                $proxies = array_slice($proxies, 0, $filters['limit']);
+                break;
+            }
         }
 
         return $proxies;
+    }
+
+    /**
+     * Get providers list
+     * @return array
+     */
+    public function getProviders(): array {
+        return array_keys($this->providers);
     }
 }

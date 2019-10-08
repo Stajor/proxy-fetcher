@@ -1,34 +1,29 @@
 <?php namespace ProxyFetcher\Providers;
 
-use GuzzleHttp\Client;
+use DOMElement;
+use ProxyFetcher\Proxy;
 
-class SslproxiesOrg {
+class SslproxiesOrg extends Provider implements ProviderInterface {
     const URL = 'https://www.sslproxies.org';
 
-    public function fetch() {
-        $client     = new Client();
-        $doc        = new \DOMDocument();
-        $results    = [];
+    public function fetch(): array {
+        $data   = [];
+        $xpath  = $this->requestXpath(self::URL);
 
-        libxml_use_internal_errors(true);
+        /** @var DOMElement $node */
+        foreach ($xpath->query('//table[@id="proxylisttable"]/tbody/tr') AS $node) {
+            $proxy  = new Proxy();
+            $tds    = $node->getElementsByTagName('td');
 
-        $response = $client->request('GET', self::URL);
-        $doc->loadHTML($response->getBody());
+            $proxy->setIp($tds->item(0)->textContent);
+            $proxy->setPort($tds->item(1)->textContent);
+            $proxy->setCountry($tds->item(2)->textContent);
+            $proxy->setHttps($tds->item(6)->textContent == 'yes');
+            $proxy->setType($tds->item(4)->textContent);
 
-        $xpath = new \DOMXPath($doc);
-
-        /** @var \DOMElement $node */
-        foreach ($xpath->query('//table[@id="proxylisttable"]/tbody/tr') AS $i => $node) {
-            $tds = $node->getElementsByTagName('td');
-
-            $results[] = [
-                'ip'            => $tds->item(0)->textContent,
-                'port'          => $tds->item(1)->textContent,
-                'country_code'  => strtolower($tds->item(3)->textContent),
-                'https'         => $tds->item(6)->textContent == 'yes'
-            ];
+            $data[] = $proxy;
         }
 
-        return $results;
+        return $data;
     }
 }

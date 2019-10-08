@@ -1,34 +1,29 @@
 <?php namespace ProxyFetcher\Providers;
 
-use GuzzleHttp\Client;
+use DOMElement;
+use ProxyFetcher\Proxy;
 
-class GatherproxyCom {
+class GatherproxyCom extends Provider implements ProviderInterface {
     const URL = 'http://www.gatherproxy.com';
 
-    public function fetch() {
-        $client     = new Client();
-        $doc        = new \DOMDocument();
-        $results    = [];
+    public function fetch(): array {
+        $data   = [];
+        $xpath  = $this->requestXpath(self::URL);
 
-        libxml_use_internal_errors(true);
-
-        $response = $client->request('GET', self::URL);
-        $doc->loadHTML($response->getBody());
-
-        $xpath = new \DOMXPath($doc);
-
-        /** @var \DOMElement $node */
+        /** @var DOMElement $node */
         foreach ($xpath->query('//div[@class="proxy-list"]/table/script') AS $node) {
-            $data = json_decode(str_replace(['gp.insertPrx(', ');'], ['', ''], trim($node->textContent)), true);
+            $proxy  = new Proxy();
+            $json   = json_decode(str_replace(['gp.insertPrx(', ');'], ['', ''], trim($node->textContent)), true);
 
-            $results[] = [
-                'ip'            => $data['PROXY_IP'],
-                'port'          => intval($data['PROXY_PORT'], 16),
-                'country_code'  => $data['PROXY_COUNTRY'],
-                'https'         => true
-            ];
+            $proxy->setIp($json['PROXY_IP']);
+            $proxy->setPort(intval($json['PROXY_PORT'], 16));
+            $proxy->setCountry($json['PROXY_COUNTRY']);
+            $proxy->setHttps(true);
+            $proxy->setType($json['PROXY_TYPE']);
+
+            $data[] = $proxy;
         }
 
-        return $results;
+        return $data;
     }
 }
