@@ -1,6 +1,5 @@
 <?php namespace ProxyFetcher\Providers;
 
-use DOMElement;
 use ProxyFetcher\Proxy;
 
 class ProxyrackCom extends Provider implements ProviderInterface {
