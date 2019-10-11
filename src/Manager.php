@@ -6,16 +6,18 @@ use ProxyFetcher\Providers\FreeProxyListNet;
 use ProxyFetcher\Providers\GatherproxyCom;
 use ProxyFetcher\Providers\MtproXyz;
 use ProxyFetcher\Providers\ProxyfishCom;
+use ProxyFetcher\Providers\ProxyrackCom;
 use ProxyFetcher\Providers\SpysOne;
 use ProxyFetcher\Providers\SslproxiesOrg;
 
 class Manager {
     protected $providers = [
-//        'free-proxy-list.net'   => FreeProxyListNet::class,
-//        'sslproxies.org'        => SslproxiesOrg::class,
-//        'gatherproxy.com'       => GatherproxyCom::class,
-//        'mtpro.xyz'             => MtproXyz::class,
-        'proxyfish.com'              => ProxyfishCom::class
+        'free-proxy-list.net'   => FreeProxyListNet::class,
+        'sslproxies.org'        => SslproxiesOrg::class,
+        'gatherproxy.com'       => GatherproxyCom::class,
+        'mtpro.xyz'             => MtproXyz::class,
+        'proxyfish.com'         => ProxyfishCom::class,
+        'proxyrack.com'         => ProxyrackCom::class
     ];
 
     /**
@@ -32,9 +34,7 @@ class Manager {
             try {
                 $provider   = new $class();
                 $data       = $provider->fetch();
-            } catch (Exception $e) {
-                echo $e->getMessage();
-            }
+            } catch (Exception $e) {}
 
             // Filter rows
             foreach ($filters AS $filter => $value) {
