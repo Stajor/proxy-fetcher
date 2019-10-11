@@ -31,6 +31,10 @@ class Manager {
         foreach ($this->providers AS $provider => $class) {
             $data = [];
 
+            if (isset($filters['provider']) && $filters['provider'] != $provider) {
+                continue;
+            }
+
             try {
                 $provider   = new $class();
                 $data       = $provider->fetch();
