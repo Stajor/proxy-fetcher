@@ -6,7 +6,8 @@
     "require": {
         "guzzlehttp/guzzle": "^6.3",
         "ext-dom": "*",
-        "ext-libxml": "*"
+        "ext-libxml": "*",
+        "fzaninotto/faker": "^1.8"
     },
     "autoload": {
         "psr-4": {
