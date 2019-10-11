@@ -4,14 +4,16 @@ use Exception;
 use ProxyFetcher\Providers\FreeProxyListNet;
 use ProxyFetcher\Providers\GatherproxyCom;
 use ProxyFetcher\Providers\MtproXyz;
+use ProxyFetcher\Providers\SpysOne;
 use ProxyFetcher\Providers\SslproxiesOrg;
 
 class Manager {
     protected $providers = [
-        'free-proxy-list.net'   => FreeProxyListNet::class,
-        'sslproxies.org'        => SslproxiesOrg::class,
+//        'free-proxy-list.net'   => FreeProxyListNet::class,
+//        'sslproxies.org'        => SslproxiesOrg::class,
         'gatherproxy.com'       => GatherproxyCom::class,
-        'mtpro.xyz'             => MtproXyz::class
+//        'mtpro.xyz'             => MtproXyz::class,
+//        'spys.one'              => SpysOne::class
     ];
 
     /**
