@@ -13,7 +13,7 @@ abstract class Provider {
     protected function request(string $url): ResponseInterface {
         $faker      = Factory::create();
         $client     = new Client();
-        $response   = $client->request('GET', $url, ['headers' => [
+        $response   = $client->request('GET', $url, ['verify' => false, 'headers' => [
             'User-Agent' => $faker->userAgent
         ]]);
 

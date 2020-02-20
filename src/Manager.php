@@ -9,6 +9,7 @@ use ProxyFetcher\Providers\ProxyfishCom;
 use ProxyFetcher\Providers\ProxyrackCom;
 use ProxyFetcher\Providers\SpysOne;
 use ProxyFetcher\Providers\SslproxiesOrg;
+use ProxyFetcher\Providers\XroxyCom;
 
 class Manager {
     protected $providers = [
@@ -17,7 +18,8 @@ class Manager {
         'gatherproxy.com'       => GatherproxyCom::class,
         'mtpro.xyz'             => MtproXyz::class,
         'proxyfish.com'         => ProxyfishCom::class,
-        'proxyrack.com'         => ProxyrackCom::class
+        'proxyrack.com'         => ProxyrackCom::class,
+        'xroxy.com'             => XroxyCom::class
     ];
 
     /**
@@ -38,7 +40,9 @@ class Manager {
             try {
                 $provider   = new $class();
                 $data       = $provider->fetch();
-            } catch (Exception $e) {}
+            } catch (Exception $e) {
+//                echo $e->getMessage();
+            }
 
             // Filter rows
             foreach ($filters AS $filter => $value) {
