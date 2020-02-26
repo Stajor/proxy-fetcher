@@ -4,6 +4,7 @@ use Exception;
 use ProxyFetcher\Providers\FreeProxyCz;
 use ProxyFetcher\Providers\FreeProxyListNet;
 use ProxyFetcher\Providers\GatherproxyCom;
+use ProxyFetcher\Providers\HttptunnelGe;
 use ProxyFetcher\Providers\MtproXyz;
 use ProxyFetcher\Providers\ProxyfishCom;
 use ProxyFetcher\Providers\ProxyListOrg;
@@ -21,7 +22,8 @@ class Manager {
         'proxyfish.com'         => ProxyfishCom::class,
         'proxyrack.com'         => ProxyrackCom::class,
         'xroxy.com'             => XroxyCom::class,
-        'proxy-list.org'        => ProxyListOrg::class
+        'proxy-list.org'        => ProxyListOrg::class,
+        'httptunnel.ge'         => HttptunnelGe::class
     ];
 
     /**
