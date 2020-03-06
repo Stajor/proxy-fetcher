@@ -14,11 +14,11 @@ class XroxyCom extends Provider implements ProviderInterface {
             $proxy  = new Proxy();
             $tds    = $node->getElementsByTagName('td');
 
-            $proxy->setIp($tds->item(1)->textContent);
-            $proxy->setPort($tds->item(2)->textContent);
-            $proxy->setCountry($tds->item(5)->textContent);
-            $proxy->setHttps($tds->item(4)->textContent == 'true');
-            $proxy->setType($tds->item(3)->textContent);
+            $proxy->setIp($tds->item(0)->textContent);
+            $proxy->setPort($tds->item(1)->textContent);
+            $proxy->setCountry($tds->item(4)->textContent);
+            $proxy->setHttps($tds->item(3)->textContent == 'true');
+            $proxy->setType($tds->item(2)->textContent);
 
             $data[] = $proxy;
         }
