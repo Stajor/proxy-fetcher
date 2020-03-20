@@ -1,15 +1,12 @@
 <?php namespace ProxyFetcher;
 
 use Exception;
-use ProxyFetcher\Providers\FreeProxyCz;
 use ProxyFetcher\Providers\FreeProxyListNet;
 use ProxyFetcher\Providers\GatherproxyCom;
 use ProxyFetcher\Providers\HttptunnelGe;
 use ProxyFetcher\Providers\MtproXyz;
 use ProxyFetcher\Providers\ProxyfishCom;
 use ProxyFetcher\Providers\ProxyListOrg;
-use ProxyFetcher\Providers\ProxyrackCom;
-use ProxyFetcher\Providers\SpysOne;
 use ProxyFetcher\Providers\SslproxiesOrg;
 use ProxyFetcher\Providers\XroxyCom;
 
@@ -20,7 +17,6 @@ class Manager {
         'gatherproxy.com'       => GatherproxyCom::class,
         'mtpro.xyz'             => MtproXyz::class,
         'proxyfish.com'         => ProxyfishCom::class,
-        'proxyrack.com'         => ProxyrackCom::class,
         'xroxy.com'             => XroxyCom::class,
         'proxy-list.org'        => ProxyListOrg::class,
         'httptunnel.ge'         => HttptunnelGe::class
