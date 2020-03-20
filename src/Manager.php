@@ -5,7 +5,6 @@ use ProxyFetcher\Providers\FreeProxyListNet;
 use ProxyFetcher\Providers\GatherproxyCom;
 use ProxyFetcher\Providers\HttptunnelGe;
 use ProxyFetcher\Providers\MtproXyz;
-use ProxyFetcher\Providers\ProxyfishCom;
 use ProxyFetcher\Providers\ProxyListOrg;
 use ProxyFetcher\Providers\SslproxiesOrg;
 use ProxyFetcher\Providers\XroxyCom;
@@ -16,7 +15,6 @@ class Manager {
         'sslproxies.org'        => SslproxiesOrg::class,
         'gatherproxy.com'       => GatherproxyCom::class,
         'mtpro.xyz'             => MtproXyz::class,
-        'proxyfish.com'         => ProxyfishCom::class,
         'xroxy.com'             => XroxyCom::class,
         'proxy-list.org'        => ProxyListOrg::class,
         'httptunnel.ge'         => HttptunnelGe::class
