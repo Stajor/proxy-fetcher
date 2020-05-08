@@ -32,7 +32,7 @@ class Proxy {
      * @param int $port
      */
     public function setPort(int $port) {
-        $this->port = $port;
+        $this->port = (int)$port;
     }
 
     /**

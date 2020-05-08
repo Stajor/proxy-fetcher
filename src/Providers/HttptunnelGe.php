@@ -17,7 +17,7 @@ class HttptunnelGe extends Provider implements ProviderInterface {
             list($ip, $port) = explode(':', $tds->item(0)->textContent);
 
             $proxy->setIp($ip);
-            $proxy->setPort($port);
+            $proxy->setPort((int)$port);
             $proxy->setCountry($tds->item(7)->getElementsByTagName('img')->item(0)->getAttribute('title'));
             $proxy->setHttps(false);
             $proxy->setType($tds->item(4)->textContent);
