@@ -14,7 +14,6 @@ class Manager {
     protected $providers = [
         'free-proxy-list.net'   => FreeProxyListNet::class,
         'sslproxies.org'        => SslproxiesOrg::class,
-        'gatherproxy.com'       => GatherproxyCom::class,
         'mtpro.xyz'             => MtproXyz::class,
         'xroxy.com'             => XroxyCom::class,
         'proxy-list.org'        => ProxyListOrg::class,
