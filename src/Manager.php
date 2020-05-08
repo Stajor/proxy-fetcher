@@ -5,6 +5,7 @@ use ProxyFetcher\Providers\FreeProxyListNet;
 use ProxyFetcher\Providers\GatherproxyCom;
 use ProxyFetcher\Providers\HttptunnelGe;
 use ProxyFetcher\Providers\MtproXyz;
+use ProxyFetcher\Providers\ProviderInterface;
 use ProxyFetcher\Providers\ProxyListOrg;
 use ProxyFetcher\Providers\SslproxiesOrg;
 use ProxyFetcher\Providers\XroxyCom;
@@ -28,15 +29,15 @@ class Manager {
     public function fetch(array $filters = []): array {
         $proxies = [];
 
-        foreach ($this->providers AS $provider => $class) {
+        foreach ($this->providers AS $host => $class) {
             $data = [];
 
-            if (isset($filters['provider']) && $filters['provider'] != $provider) {
+            if (isset($filters['provider']) && $filters['provider'] != $host) {
                 continue;
             }
 
             try {
-                $provider   = new $class();
+                $provider   = $this->getProvider($host);
                 $data       = $provider->fetch();
             } catch (Exception $e) {
 //                echo $e->getMessage();
@@ -70,6 +71,12 @@ class Manager {
      * @return array
      */
     public function getProviders(): array {
-        return array_keys($this->providers);
+        return $this->providers;
+    }
+
+    public function getProvider(string $providerHost): ProviderInterface {
+        $class = $this->providers[$providerHost];
+
+        return new $class();
     }
 }
