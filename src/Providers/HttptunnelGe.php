@@ -14,7 +14,7 @@ class HttptunnelGe extends Provider implements ProviderInterface {
             $proxy  = new Proxy();
             $tds    = $node->getElementsByTagName('td');
 
-            list($ip, $port) = explode(':', $tds->item(0)->textContent);
+            list($ip, $port) = explode(':', trim($tds->item(0)->textContent));
 
             $proxy->setIp($ip);
             $proxy->setPort((int)$port);
