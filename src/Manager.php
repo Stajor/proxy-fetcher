@@ -7,6 +7,7 @@ use ProxyFetcher\Providers\HttptunnelGe;
 use ProxyFetcher\Providers\MtproXyz;
 use ProxyFetcher\Providers\ProviderInterface;
 use ProxyFetcher\Providers\ProxydbNet;
+use ProxyFetcher\Providers\ProxyListDownload;
 use ProxyFetcher\Providers\ProxyListOrg;
 use ProxyFetcher\Providers\SslproxiesOrg;
 use ProxyFetcher\Providers\XroxyCom;
@@ -19,7 +20,8 @@ class Manager {
         'xroxy.com'             => XroxyCom::class,
         'proxy-list.org'        => ProxyListOrg::class,
         'httptunnel.ge'         => HttptunnelGe::class,
-        'proxydb.net'           => ProxydbNet::class
+        'proxydb.net'           => ProxydbNet::class,
+        'proxy-list.download'   => ProxyListDownload::class
     ];
 
     /**

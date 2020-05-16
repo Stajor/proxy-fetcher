@@ -4,6 +4,7 @@
     "type": "library",
     "license": "MIT",
     "require": {
+        "ext-json": "*",
         "guzzlehttp/guzzle": "^6.3",
         "ext-dom": "*",
         "ext-libxml": "*",
