@@ -2,7 +2,7 @@
 
 use Exception;
 use ProxyFetcher\Providers\FreeProxyListNet;
-use ProxyFetcher\Providers\GatherproxyCom;
+use ProxyFetcher\Providers\HideMyIpCom;
 use ProxyFetcher\Providers\HttptunnelGe;
 use ProxyFetcher\Providers\MtproXyz;
 use ProxyFetcher\Providers\ProviderInterface;
@@ -21,7 +21,8 @@ class Manager {
         'proxy-list.org'        => ProxyListOrg::class,
         'httptunnel.ge'         => HttptunnelGe::class,
         'proxydb.net'           => ProxydbNet::class,
-        'proxy-list.download'   => ProxyListDownload::class
+        'proxy-list.download'   => ProxyListDownload::class,
+        'hide-my-ip.com'        => HideMyIpCom::class
     ];
 
     /**

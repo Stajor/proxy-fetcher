@@ -1,5 +1,6 @@
 <?php namespace ProxyFetcher\Providers;
 
+use DOMElement;
 use ProxyFetcher\Proxy;
 
 class XroxyCom extends Provider implements ProviderInterface {
