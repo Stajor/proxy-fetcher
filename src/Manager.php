@@ -6,6 +6,7 @@ use ProxyFetcher\Providers\HideMyIpCom;
 use ProxyFetcher\Providers\HttptunnelGe;
 use ProxyFetcher\Providers\MtproXyz;
 use ProxyFetcher\Providers\ProviderInterface;
+use ProxyFetcher\Providers\ProxyDailyCom;
 use ProxyFetcher\Providers\ProxydbNet;
 use ProxyFetcher\Providers\ProxyListDownload;
 use ProxyFetcher\Providers\ProxyListOrg;
@@ -22,7 +23,8 @@ class Manager {
         'httptunnel.ge'         => HttptunnelGe::class,
         'proxydb.net'           => ProxydbNet::class,
         'proxy-list.download'   => ProxyListDownload::class,
-        'hide-my-ip.com'        => HideMyIpCom::class
+        'hide-my-ip.com'        => HideMyIpCom::class,
+        'proxy-daily.com'       => ProxyDailyCom::class
     ];
 
     /**
