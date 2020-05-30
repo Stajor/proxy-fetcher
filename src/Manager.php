@@ -34,8 +34,6 @@ class Manager {
         $proxies = [];
 
         foreach ($this->providers AS $host => $class) {
-            $data = [];
-
             if (isset($filters['provider']) && $filters['provider'] != $host) {
                 continue;
             }
@@ -44,7 +42,7 @@ class Manager {
                 $provider   = $this->getProvider($host);
                 $data       = $provider->fetch();
             } catch (Exception $e) {
-//                echo $e->getMessage();
+                continue;
             }
 
             // Filter rows
@@ -78,9 +76,21 @@ class Manager {
         return $this->providers;
     }
 
+    /**
+     * @param string $providerHost
+     * @return ProviderInterface
+     */
     public function getProvider(string $providerHost): ProviderInterface {
         $class = $this->providers[$providerHost];
 
         return new $class();
+    }
+
+    /**
+     * @param string $name
+     * @param ProviderInterface $provider
+     */
+    public function addProvider(string $name, ProviderInterface $provider) {
+        $this->providers[$name] = get_class($provider);
     }
 }

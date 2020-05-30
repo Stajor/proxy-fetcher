@@ -41,4 +41,15 @@ class ManagerTest extends TestCase {
             $this->assertEquals($class, get_class(self::$manager->getProvider($host)));
         }
     }
+
+    public function testCustomProvider() {
+        $provider = new CustomProvider();
+        $proxies = $provider->fetch();
+
+        self::$manager->addProvider('custom', $provider);
+
+        $this->assertInstanceOf(CustomProvider::class, self::$manager->getProvider('custom'));
+        $this->assertCount(1, $proxies);
+        $this->assertInstanceOf(Proxy::class, $proxies[0]);
+    }
 }
