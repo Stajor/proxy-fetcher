@@ -5,11 +5,10 @@
     "license": "MIT",
     "require": {
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^6.3",
         "ext-dom": "*",
         "ext-libxml": "*",
-        "fzaninotto/faker": "^1.8",
-        "kyranrana/cloudflare-bypass": "^3.3"
+        "guzzlehttp/guzzle": "^7.0",
+        "fzaninotto/faker": "^1.8"
     },
     "autoload": {
         "psr-4": {
