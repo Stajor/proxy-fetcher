@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use ProxyFetcher\Manager;
 use ProxyFetcher\Providers\ProviderInterface;
+use ProxyFetcher\Proxy;
 
 class ProviderTestCase extends TestCase {
     private static $provider;

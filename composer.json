@@ -10,6 +10,9 @@
         "guzzlehttp/guzzle": "^7.0",
         "fzaninotto/faker": "^1.8"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    },
     "autoload": {
         "psr-4": {
             "ProxyFetcher\\": "src/"
@@ -23,7 +26,7 @@
             "tests/"
         ]
     },
-    "require-dev": {
-        "phpunit/phpunit": "^9"
+    "scripts": {
+        "test": "phpunit tests"
     }
 }
