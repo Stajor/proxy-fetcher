@@ -11,6 +11,7 @@ use ProxyFetcher\Providers\ProxydbNet;
 use ProxyFetcher\Providers\ProxyListDownload;
 use ProxyFetcher\Providers\ProxyListOrg;
 use ProxyFetcher\Providers\ProxypediaOrg;
+use ProxyFetcher\Providers\ProxyscanIo;
 use ProxyFetcher\Providers\SslproxiesOrg;
 use ProxyFetcher\Providers\XroxyCom;
 
@@ -26,7 +27,8 @@ class Manager {
         'proxy-list.download'   => ProxyListDownload::class,
         'hide-my-ip.com'        => HideMyIpCom::class,
         'proxy-daily.com'       => ProxyDailyCom::class,
-        'proxypedia.org'        => ProxypediaOrg::class
+        'proxypedia.org'        => ProxypediaOrg::class,
+        'proxyscan.io'          => ProxyscanIo::class
     ];
 
     /**
