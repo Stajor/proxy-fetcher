@@ -3,6 +3,7 @@
 use Exception;
 use ProxyFetcher\Providers\FreeProxyListNet;
 use ProxyFetcher\Providers\HideMyIpCom;
+use ProxyFetcher\Providers\HidesterCom;
 use ProxyFetcher\Providers\HttptunnelGe;
 use ProxyFetcher\Providers\MtproXyz;
 use ProxyFetcher\Providers\ProviderInterface;
@@ -28,7 +29,8 @@ class Manager {
         'hide-my-ip.com'        => HideMyIpCom::class,
         'proxy-daily.com'       => ProxyDailyCom::class,
         'proxypedia.org'        => ProxypediaOrg::class,
-        'proxyscan.io'          => ProxyscanIo::class
+        'proxyscan.io'          => ProxyscanIo::class,
+        'hidester.com'          => HidesterCom::class
     ];
 
     /**

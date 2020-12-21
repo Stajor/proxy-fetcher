@@ -10,16 +10,17 @@ use Psr\Http\Message\ResponseInterface;
 abstract class Provider {
     /**
      * @param string $url
+     * @param array $headers
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    protected function request(string $url): ResponseInterface {
+    protected function request(string $url, array $headers = []): ResponseInterface {
         $faker  = Factory::create();
         $client = new Client();
 
-        return $client->request('GET', $url, ['verify' => false, 'headers' => [
-            'User-Agent' => $faker->userAgent
-        ]]);
+        $headers['User-Agent'] = $faker->userAgent;
+
+        return $client->request('GET', $url, ['verify' => false, 'headers' => $headers]);
     }
 
     /**
@@ -35,5 +36,15 @@ abstract class Provider {
         $doc->loadHTML($this->request($url)->getBody());
 
         return new DOMXPath($doc);
+    }
+
+    /**
+     * @param string $url
+     * @param array $headers
+     * @return ResponseInterface
+     * @throws GuzzleException
+     */
+    protected function requestAjax(string $url, array $headers = []): ResponseInterface {
+        return $this->request($url, array_merge(['Content-Type' => 'application/json'], $headers));
     }
 }
