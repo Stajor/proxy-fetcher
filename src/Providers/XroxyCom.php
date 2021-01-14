@@ -1,29 +1,27 @@
 <?php namespace ProxyFetcher\Providers;
 
-use DOMElement;
+use GuzzleHttp\Exception\GuzzleException;
 use ProxyFetcher\Proxy;
+use Symfony\Component\DomCrawler\Crawler;
 
 class XroxyCom extends Provider implements ProviderInterface {
     const URL = 'https://madison.xroxy.com/proxylist.php?port=&type=All_http&ssl=&country=&latency=&reliability=#table';
 
+    /**
+     * @return array
+     * @throws GuzzleException
+     */
     public function fetch(): array {
-        $data   = [];
-        $xpath  = $this->requestXpath(self::URL);
-
-        /** @var DOMElement $node */
-        foreach ($xpath->query('//tr[@class="row1" or @class="row0"]') AS $node) {
+        return $this->parse(self::URL, 'tr.row1, tr.row0')->each(function(Crawler $node) {
             $proxy  = new Proxy();
-            $tds    = $node->getElementsByTagName('td');
+            $tds    = $node->filter('td');
 
-            $proxy->setIp($tds->item(0)->textContent);
-            $proxy->setPort($tds->item(1)->textContent);
-            $proxy->setCountry($tds->item(4)->textContent);
-            $proxy->setHttps($tds->item(3)->textContent == 'true');
-            $proxy->setType($tds->item(2)->textContent);
+            $proxy->setIp($tds->eq(0)->text());
+            $proxy->setPort($tds->eq(1)->text());
+            $proxy->setCountry($tds->eq(4)->text());
+            $proxy->setType($tds->eq(2)->text());
 
-            $data[] = $proxy;
-        }
-
-        return $data;
+            return $proxy;
+        });
     }
 }

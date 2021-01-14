@@ -1,10 +1,15 @@
 <?php namespace ProxyFetcher\Providers;
 
+use GuzzleHttp\Exception\GuzzleException;
 use ProxyFetcher\Proxy;
 
 class HidesterCom extends Provider implements ProviderInterface {
     const URL = 'https://hidester.com/proxydata/php/data.php';
 
+    /**
+     * @return array
+     * @throws GuzzleException
+     */
     public function fetch(): array {
         $data   = [];
         $params = [
@@ -29,7 +34,6 @@ class HidesterCom extends Provider implements ProviderInterface {
             $proxy->setIp($row['IP']);
             $proxy->setPort($row['PORT']);
             $proxy->setCountry($row['country']);
-            $proxy->setHttps(true);
             $proxy->setType($row['type']);
 
             $data[] = $proxy;

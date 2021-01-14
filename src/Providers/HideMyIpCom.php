@@ -1,32 +1,34 @@
 <?php namespace ProxyFetcher\Providers;
 
-use DOMElement;
+use GuzzleHttp\Exception\GuzzleException;
 use ProxyFetcher\Proxy;
+use Symfony\Component\DomCrawler\Crawler;
 
 class HideMyIpCom extends Provider implements ProviderInterface {
     const URL = 'https://www.hide-my-ip.com/proxylist.shtml';
 
+    /**
+     * @return array
+     * @throws GuzzleException
+     */
     public function fetch(): array {
-        $data   = [];
-        $xpath  = $this->requestXpath(self::URL);
+        $data = [];
 
-        /** @var DOMElement $node */
-        foreach ($xpath->query('//script') AS $node) {
-            if (strpos($node->textContent, 'var json') !== false) {
-                list($json,) = explode(';', str_replace('var json =', '', $node->textContent));
+        $this->parse(self::URL, 'script')->each(function(Crawler $node) use (&$data) {
+            if (strpos($node->text(), 'var json') !== false) {
+                list($json,) = explode(';', str_replace('var json =', '', $node->text()));
 
                 foreach (json_decode(trim($json), true) AS $row) {
                     $proxy  = new Proxy();
                     $proxy->setIp($row['i']);
                     $proxy->setPort($row['p']);
                     $proxy->setCountry($row['c']['f']);
-                    $proxy->setHttps($row['tp'] === 'HTTPS');
                     $proxy->setType($row['tp']);
 
                     $data[] = $proxy;
                 }
             }
-        }
+        });
 
         return $data;
     }

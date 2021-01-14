@@ -1,11 +1,16 @@
 <?php namespace ProxyFetcher\Providers;
 
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use ProxyFetcher\Proxy;
 
 class ProxyListDownload extends Provider implements ProviderInterface {
     const URL = 'https://www.proxy-list.download/api/v0/get?l=en&t=';
 
+    /**
+     * @return array
+     * @throws GuzzleException
+     */
     public function fetch(): array {
         $types  = ['http', 'https', 'socks4', 'socks5'];
         $data   = [];
@@ -17,7 +22,6 @@ class ProxyListDownload extends Provider implements ProviderInterface {
                     $proxy->setIp($row['IP']);
                     $proxy->setPort($row['PORT']);
                     $proxy->setCountry($row['COUNTRY'] ?? 'N/A');
-                    $proxy->setHttps($row['ANON'] == 'Https');
                     $proxy->setType($row['ANON']);
 
                     $data[] = $proxy;

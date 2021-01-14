@@ -4,11 +4,12 @@
     "type": "library",
     "license": "MIT",
     "require": {
+        "php": ">=7.2",
         "ext-json": "*",
-        "ext-dom": "*",
-        "ext-libxml": "*",
         "guzzlehttp/guzzle": "^7.0",
-        "fakerphp/faker": "^1.11"
+        "fakerphp/faker": "^1.11",
+        "symfony/css-selector": "^5.2",
+        "symfony/dom-crawler": "^5.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^9"
@@ -27,6 +28,6 @@
         ]
     },
     "scripts": {
-        "test": "phpunit tests"
+        "test": "phpunit tests --filter=SslproxiesOrgTest"
     }
 }

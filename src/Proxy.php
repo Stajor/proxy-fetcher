@@ -4,7 +4,6 @@ class Proxy {
     private $ip;
     private $port;
     private $country;
-    private $https;
     private $type;
 
     /**
@@ -50,23 +49,9 @@ class Proxy {
     }
 
     /**
-     * @return bool
-     */
-    public function getHttps() {
-        return $this->https;
-    }
-
-    /**
-     * @param bool $https
-     */
-    public function setHttps(bool $https) {
-        $this->https = $https;
-    }
-
-    /**
      * @return string
      */
-    public function getType() {
+    public function getType(): string {
         return $this->type;
     }
 

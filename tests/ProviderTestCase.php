@@ -9,12 +9,15 @@ class ProviderTestCase extends TestCase {
     private static $provider;
 
     public function testData() {
+        $proxies = self::getProvider()->fetch();
+
+        $this->assertNotEmpty($proxies);
+
         /** @var Proxy $proxy */
-        foreach (self::getProvider()->fetch() AS $proxy) {
+        foreach ($proxies AS $proxy) {
             $this->assertNotEmpty($proxy->getIp());
             $this->assertNotEmpty($proxy->getPort());
             $this->assertNotEmpty($proxy->getCountry());
-            $this->assertIsBool($proxy->getHttps());
             $this->assertNotEmpty($proxy->getType());
         }
     }

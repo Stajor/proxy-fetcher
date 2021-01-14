@@ -1,30 +1,35 @@
 <?php namespace ProxyFetcher\Providers;
 
+use GuzzleHttp\Exception\GuzzleException;
 use ProxyFetcher\Proxy;
+use Symfony\Component\DomCrawler\Crawler;
 
 class HttptunnelGe extends Provider implements ProviderInterface {
     const URL = 'http://www.httptunnel.ge/ProxyListForFree.aspx';
 
+    /**
+     * @return array
+     * @throws GuzzleException
+     */
     public function fetch(): array {
-        $data   = [];
-        $xpath  = $this->requestXpath(self::URL);
+        return array_filter($this->parse(self::URL, '#ctl00_ContentPlaceHolder1_GridViewNEW > tr')
+            ->each(function(Crawler $node) {
+                $tds = $node->filter('td');
 
-        /** @var DOMElement $node */
-        foreach ($xpath->query('//table[contains(@id, "GridView")]//tr[(count(td)>2)]') AS $node) {
-            $proxy  = new Proxy();
-            $tds    = $node->getElementsByTagName('td');
+                if (!$tds->count()) {
+                    return null;
+                }
 
-            list($ip, $port) = explode(':', trim($tds->item(0)->textContent));
+                $proxy = new Proxy();
 
-            $proxy->setIp($ip);
-            $proxy->setPort((int)$port);
-            $proxy->setCountry($tds->item(7)->getElementsByTagName('img')->item(0)->getAttribute('title'));
-            $proxy->setHttps(false);
-            $proxy->setType($tds->item(4)->textContent);
+                list($ip, $port) = explode(':', trim($tds->first()->text()));
 
-            $data[] = $proxy;
-        }
+                $proxy->setIp($ip);
+                $proxy->setPort((int)$port);
+                $proxy->setCountry($tds->eq(7)->filter('img')->first()->attr('title'));
+                $proxy->setType($tds->eq(4)->text());
 
-        return $data;
+                return $proxy;
+            }));
     }
 }

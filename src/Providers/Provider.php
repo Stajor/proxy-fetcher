@@ -1,7 +1,5 @@
 <?php namespace ProxyFetcher\Providers;
 
-use DOMDocument;
-use DOMXPath;
 use Faker\Factory;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -22,21 +20,6 @@ abstract class Provider {
         $headers['User-Agent'] = $faker->userAgent;
 
         return $client->request('GET', $url, ['verify' => false, 'headers' => $headers]);
-    }
-
-    /**
-     * @param string $url
-     * @return DOMXPath
-     * @throws GuzzleException
-     */
-    protected function requestXpath(string $url): DOMXPath {
-        $doc = new DOMDocument();
-
-        libxml_use_internal_errors(true);
-
-        $doc->loadHTML($this->request($url)->getBody());
-
-        return new DOMXPath($doc);
     }
 
     /**

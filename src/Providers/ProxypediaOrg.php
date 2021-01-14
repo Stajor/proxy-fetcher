@@ -2,36 +2,30 @@
 
 use DOMElement;
 use ProxyFetcher\Proxy;
+use Symfony\Component\DomCrawler\Crawler;
 
 class ProxypediaOrg extends Provider implements ProviderInterface {
     const URL = 'https://proxypedia.org';
 
     public function fetch(): array {
-        $data   = [];
-        $xpath  = $this->requestXpath(self::URL);
+        return array_filter($this->parse(self::URL, 'ul > li')->each(function(Crawler $node) {
+            $a = $node->filter('a');
 
-        /** @var DOMElement $node */
-        foreach ($xpath->query('//ul/li') AS $node) {
-            $a = $node->getElementsByTagName('a');
-
-            if ($a->count() == 0 || strpos($a->item(0)->textContent, ':') === false) {
-                continue;
+            if ($a->count() == 0 || strpos($a->first()->text(), ':') === false) {
+                return null;
             }
 
-            list($ip, $port) = explode(':', $a->item(0)->textContent);
+            list($ip, $port) = explode(':', $a->first()->text());
 
-            $country = str_replace([$a->item(0)->textContent, '(', ')'], [''], $node->textContent);
+            $country = str_replace([$a->first()->text(), '(', ')'], [''], $node->text());
 
             $proxy  = new Proxy();
             $proxy->setIp($ip);
             $proxy->setPort($port);
             $proxy->setCountry(empty($country) ? 'N/A' : $country);
-            $proxy->setHttps(false);
             $proxy->setType('http');
 
-            $data[] = $proxy;
-        }
-
-        return $data;
+            return $proxy;
+        }));
     }
 }

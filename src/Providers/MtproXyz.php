@@ -1,25 +1,24 @@
 <?php namespace ProxyFetcher\Providers;
 
+use GuzzleHttp\Exception\GuzzleException;
 use ProxyFetcher\Proxy;
 
 class MtproXyz extends Provider implements ProviderInterface {
     const URL = 'https://mtpro.xyz/api/?type=socks';
 
+    /**
+     * @return array
+     * @throws GuzzleException
+     */
     public function fetch(): array {
-        $data   = [];
-        $rows   = json_decode($this->request(self::URL)->getBody(), true) ?? [];
-
-        foreach ($rows AS $row) {
-            $proxy  = new Proxy();
+        return array_map(function(array $row) {
+            $proxy = new Proxy();
             $proxy->setIp($row['ip']);
             $proxy->setPort($row['port']);
             $proxy->setCountry($row['country']);
-            $proxy->setHttps(true);
             $proxy->setType('SOCKS5');
 
-            $data[] = $proxy;
-        }
-
-        return $data;
+            return $proxy;
+        }, json_decode($this->request(self::URL)->getBody(), true) ?? []);
     }
 }

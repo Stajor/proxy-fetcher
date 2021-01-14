@@ -9,7 +9,6 @@ class CustomProvider implements ProviderInterface {
         $proxy->setIp('127.0.0.1');
         $proxy->setPort(8080);
         $proxy->setCountry('N/A');
-        $proxy->setHttps(false);
         $proxy->setType('HTTP');
 
         return [$proxy];

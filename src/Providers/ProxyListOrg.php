@@ -1,31 +1,30 @@
 <?php namespace ProxyFetcher\Providers;
 
-use DOMElement;
+use GuzzleHttp\Exception\GuzzleException;
 use ProxyFetcher\Proxy;
+use Symfony\Component\DomCrawler\Crawler;
 
 class ProxyListOrg extends Provider implements ProviderInterface {
     const URL = 'https://proxy-list.org/english/index.php';
 
+    /**
+     * @return array
+     * @throws GuzzleException
+     */
     public function fetch(): array {
-        $data   = [];
-        $xpath  = $this->requestXpath(self::URL);
-
-        /** @var DOMElement $node */
-        foreach ($xpath->query('//div[@class="table-wrap"]//div[@class="table"]//ul') AS $node) {
+        return $this->parse(self::URL, '.table > ul')->each(function(Crawler $node) {
             $proxy  = new Proxy();
-            $lis    = $node->getElementsByTagName('li');
-            $uri    = base64_decode(str_replace(["Proxy('", "')"], '', $lis->item(0)->textContent));
+            $lis    = $node->filter('li');
+            $uri    = base64_decode(str_replace(["Proxy('", "')"], '', $lis->first()->text()));
+
             list($ip, $port) = explode(':', $uri);
 
             $proxy->setIp($ip);
             $proxy->setPort($port);
-            $proxy->setCountry($lis->item(4)->textContent);
-            $proxy->setHttps($lis->item(1)->textContent == 'HTTPS');
-            $proxy->setType($lis->item(3)->textContent);
+            $proxy->setCountry($lis->eq(4)->text());
+            $proxy->setType($lis->eq(3)->text());
 
-            $data[] = $proxy;
-        }
-
-        return $data;
+            return $proxy;
+        });
     }
 }
