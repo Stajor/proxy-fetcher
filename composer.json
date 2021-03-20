@@ -28,6 +28,6 @@
         ]
     },
     "scripts": {
-        "test": "phpunit tests --filter=SslproxiesOrgTest"
+        "test": "phpunit tests"
     }
 }
