@@ -15,6 +15,7 @@ use ProxyFetcher\Providers\ProxynovaCom;
 use ProxyFetcher\Providers\ProxypediaOrg;
 use ProxyFetcher\Providers\ProxyscanIo;
 use ProxyFetcher\Providers\SslproxiesOrg;
+use ProxyFetcher\Providers\UsProxyOrg;
 use ProxyFetcher\Providers\XroxyCom;
 
 class Manager {
@@ -32,7 +33,8 @@ class Manager {
         'proxypedia.org'        => ProxypediaOrg::class,
         'proxyscan.io'          => ProxyscanIo::class,
         'hidester.com'          => HidesterCom::class,
-        'proxynova.com'         => ProxynovaCom::class
+        'proxynova.com'         => ProxynovaCom::class,
+        'us-proxy.org'          => UsProxyOrg::class
     ];
 
     /**

@@ -15,11 +15,11 @@ abstract class Provider {
      */
     protected function request(string $url, array $headers = []): ResponseInterface {
         $faker  = Factory::create();
-        $client = new Client();
+        $client = new Client(['cookies' => true, 'allow_redirects' => true, 'verify' => false]);
 
         $headers['User-Agent'] = $faker->userAgent;
 
-        return $client->request('GET', $url, ['verify' => false, 'headers' => $headers]);
+        return $client->request('GET', $url, ['headers' => $headers]);
     }
 
     /**
