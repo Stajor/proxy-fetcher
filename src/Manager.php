@@ -14,6 +14,7 @@ use ProxyFetcher\Providers\ProxyListOrg;
 use ProxyFetcher\Providers\ProxynovaCom;
 use ProxyFetcher\Providers\ProxypediaOrg;
 use ProxyFetcher\Providers\ProxyscanIo;
+use ProxyFetcher\Providers\SocksProxyNet;
 use ProxyFetcher\Providers\SslproxiesOrg;
 use ProxyFetcher\Providers\UsProxyOrg;
 use ProxyFetcher\Providers\XroxyCom;
@@ -34,7 +35,8 @@ class Manager {
         'proxyscan.io'          => ProxyscanIo::class,
         'hidester.com'          => HidesterCom::class,
         'proxynova.com'         => ProxynovaCom::class,
-        'us-proxy.org'          => UsProxyOrg::class
+        'us-proxy.org'          => UsProxyOrg::class,
+        'socks-proxy.net'       => SocksProxyNet::class
     ];
 
     /**
@@ -54,6 +56,7 @@ class Manager {
                 $provider   = $this->getProvider($host);
                 $data       = $provider->fetch();
             } catch (Exception $e) {
+//                echo $e->getMessage();
                 continue;
             }
 

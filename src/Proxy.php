@@ -45,7 +45,7 @@ class Proxy {
      * @param string $country
      */
     public function setCountry(string $country) {
-        $this->country = trim($country);
+        $this->country = empty($country) ? 'N/A' : trim($country);
     }
 
     /**
