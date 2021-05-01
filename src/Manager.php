@@ -11,6 +11,7 @@ use ProxyFetcher\Providers\ProxyDailyCom;
 use ProxyFetcher\Providers\ProxydbNet;
 use ProxyFetcher\Providers\ProxyListDownload;
 use ProxyFetcher\Providers\ProxyListOrg;
+use ProxyFetcher\Providers\ProxylistplusCom;
 use ProxyFetcher\Providers\ProxynovaCom;
 use ProxyFetcher\Providers\ProxypediaOrg;
 use ProxyFetcher\Providers\ProxyscanIo;
@@ -36,7 +37,8 @@ class Manager {
         'hidester.com'          => HidesterCom::class,
         'proxynova.com'         => ProxynovaCom::class,
         'us-proxy.org'          => UsProxyOrg::class,
-        'socks-proxy.net'       => SocksProxyNet::class
+        'socks-proxy.net'       => SocksProxyNet::class,
+        'proxylistplus.com'     => ProxylistplusCom::class
     ];
 
     /**
