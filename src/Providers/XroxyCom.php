@@ -5,7 +5,7 @@ use ProxyFetcher\Proxy;
 use Symfony\Component\DomCrawler\Crawler;
 
 class XroxyCom extends Provider implements ProviderInterface {
-    const URL = 'https://madison.xroxy.com/proxylist.php?port=&type=All_http&ssl=&country=&latency=&reliability=#table';
+    const URL = 'https://www.xroxy.com/proxylist.htm';
 
     /**
      * @return array
