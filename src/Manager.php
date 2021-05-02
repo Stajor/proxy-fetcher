@@ -1,6 +1,7 @@
 <?php namespace ProxyFetcher;
 
 use Exception;
+use ProxyFetcher\Providers\CoolProxyNet;
 use ProxyFetcher\Providers\FreeProxyListNet;
 use ProxyFetcher\Providers\HideMyIpCom;
 use ProxyFetcher\Providers\HidesterCom;
@@ -38,7 +39,8 @@ class Manager {
         'proxynova.com'         => ProxynovaCom::class,
         'us-proxy.org'          => UsProxyOrg::class,
         'socks-proxy.net'       => SocksProxyNet::class,
-        'proxylistplus.com'     => ProxylistplusCom::class
+        'proxylistplus.com'     => ProxylistplusCom::class,
+        'cool-proxy.net'        => CoolProxyNet::class
     ];
 
     /**
