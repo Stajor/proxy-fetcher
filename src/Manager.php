@@ -17,6 +17,7 @@ use ProxyFetcher\Providers\ProxynovaCom;
 use ProxyFetcher\Providers\ProxypediaOrg;
 use ProxyFetcher\Providers\ProxyscanIo;
 use ProxyFetcher\Providers\SocksProxyNet;
+use ProxyFetcher\Providers\SpysMe;
 use ProxyFetcher\Providers\SslproxiesOrg;
 use ProxyFetcher\Providers\UsProxyOrg;
 use ProxyFetcher\Providers\XroxyCom;
@@ -40,7 +41,8 @@ class Manager {
         'us-proxy.org'          => UsProxyOrg::class,
         'socks-proxy.net'       => SocksProxyNet::class,
         'proxylistplus.com'     => ProxylistplusCom::class,
-        'cool-proxy.net'        => CoolProxyNet::class
+        'cool-proxy.net'        => CoolProxyNet::class,
+        'spys.me'               => SpysMe::class
     ];
 
     /**
