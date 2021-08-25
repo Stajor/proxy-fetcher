@@ -12,7 +12,7 @@ class SocksProxyNet extends Provider implements ProviderInterface {
      * @throws GuzzleException
      */
     public function fetch(): array {
-        return $this->parse(self::URL, 'table#proxylisttable > tbody > tr')->each(function(Crawler $node) {
+        return $this->parse(self::URL, 'div.fpl-list > table > tbody > tr')->each(function(Crawler $node) {
             $proxy  = new Proxy();
             $tds    = $node->filter('td');
 

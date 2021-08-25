@@ -14,7 +14,6 @@ use ProxyFetcher\Providers\ProxyListDownload;
 use ProxyFetcher\Providers\ProxyListOrg;
 use ProxyFetcher\Providers\ProxylistplusCom;
 use ProxyFetcher\Providers\ProxynovaCom;
-use ProxyFetcher\Providers\ProxypediaOrg;
 use ProxyFetcher\Providers\ProxyscanIo;
 use ProxyFetcher\Providers\SocksProxyNet;
 use ProxyFetcher\Providers\SpysMe;
@@ -34,7 +33,6 @@ class Manager {
         'proxy-list.download'   => ProxyListDownload::class,
         'hide-my-ip.com'        => HideMyIpCom::class,
         'proxy-daily.com'       => ProxyDailyCom::class,
-        'proxypedia.org'        => ProxypediaOrg::class,
         'proxyscan.io'          => ProxyscanIo::class,
         'hidester.com'          => HidesterCom::class,
         'proxynova.com'         => ProxynovaCom::class,
