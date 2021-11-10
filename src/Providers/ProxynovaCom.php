@@ -19,10 +19,10 @@ class ProxynovaCom extends Provider implements ProviderInterface {
                return null;
             }
 
-            preg_match('/(\d+\.+\d+\.+\d+\.+\d*)/', $tds->first()->text(), $matches);
+            $ip = ltrim(preg_replace("/[^0-9.]/", "", $tds->first()->text()), '.');
 
             $proxy = new Proxy();
-            $proxy->setIp($matches[0]);
+            $proxy->setIp($ip);
             $proxy->setPort($tds->eq(1)->text());
             $proxy->setCountry($tds->eq(5)->text());
             $proxy->setType($tds->eq(6)->text());
