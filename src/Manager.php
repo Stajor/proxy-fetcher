@@ -3,6 +3,7 @@
 use Exception;
 use ProxyFetcher\Providers\CoolProxyNet;
 use ProxyFetcher\Providers\FreeProxyListNet;
+use ProxyFetcher\Providers\GeonodeCom;
 use ProxyFetcher\Providers\HideMyIpCom;
 use ProxyFetcher\Providers\HidesterCom;
 use ProxyFetcher\Providers\HttptunnelGe;
@@ -40,7 +41,8 @@ class Manager {
         'socks-proxy.net'       => SocksProxyNet::class,
         'proxylistplus.com'     => ProxylistplusCom::class,
         'cool-proxy.net'        => CoolProxyNet::class,
-        'spys.me'               => SpysMe::class
+        'spys.me'               => SpysMe::class,
+        'geonode.com'           => GeonodeCom::class
     ];
 
     /**
