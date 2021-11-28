@@ -5,6 +5,7 @@ use ProxyFetcher\Providers\CoolProxyNet;
 use ProxyFetcher\Providers\FreeProxyListNet;
 use ProxyFetcher\Providers\GeonodeCom;
 use ProxyFetcher\Providers\HideMyIpCom;
+use ProxyFetcher\Providers\HidemyName;
 use ProxyFetcher\Providers\HidesterCom;
 use ProxyFetcher\Providers\HttptunnelGe;
 use ProxyFetcher\Providers\MtproXyz;
@@ -42,7 +43,8 @@ class Manager {
         'proxylistplus.com'     => ProxylistplusCom::class,
         'cool-proxy.net'        => CoolProxyNet::class,
         'spys.me'               => SpysMe::class,
-        'geonode.com'           => GeonodeCom::class
+        'geonode.com'           => GeonodeCom::class,
+        'hidemy.name'           => HidemyName::class
     ];
 
     /**
