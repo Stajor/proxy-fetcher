@@ -8,8 +8,8 @@
         "ext-json": "*",
         "guzzlehttp/guzzle": "^7.0",
         "fakerphp/faker": "^1.11",
-        "symfony/css-selector": "^5.2",
-        "symfony/dom-crawler": "^5.2"
+        "symfony/css-selector": "^6.0",
+        "symfony/dom-crawler": "^6.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9"
